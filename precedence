@@ -1,0 +1,55 @@
+import numpy
+class precedence:
+	def __init__(self):
+		self.graph = defaultdict(list)
+		self.V = vertices
+		"do "
+
+	def take_input(self):
+		number_of_nodes=input("Enter number of nodes")
+		print (number_of_nodes)
+		number_of_nodes=int(number_of_nodes)
+		list_of_vars=set()
+		list_of_trans=list()
+		#s=input("Enter the schedule")
+		with open("input.txt","r") as f:
+			for txt in f:
+				list_of_trans.append(txt)
+				list_of_vars.add(txt[3])
+
+#//print(list_of_trans)
+		ser=list()
+		print(list_of_vars)
+		par=0
+		parent=list()
+		#print(len(list_of_trans))
+		for val in list_of_vars:
+			for i in list_of_trans:
+				#print(i)
+
+				if val==i[3]:
+					#print(val)
+					t=int(i[1])
+					parent.append(t-1)
+					ser.append(i[0])
+
+		print(ser)
+		mat=[[0 for k in range(number_of_nodes+1)]for j in range(number_of_nodes+1)]
+		for val in list_of_vars:
+			for i in list_of_trans:
+
+				if val==i[3]:
+					if par <len(parent)-1:
+						print(ser[par])
+						if ser[par]=="r" and ser[par+1]=="w":
+							mat[parent[par]][parent[par+1]]=1
+						elif ser[par]=="w" and ser[par+1]=="r":
+							mat[parent[par]][parent[par+1]]=1
+						if ser[par]=="w" and ser[par+1]=="w":
+							mat[parent[par]][parent[par+1]]=1
+						print(par)
+				par += 1
+
+
+		print(mat)
+precedence().take_input()
